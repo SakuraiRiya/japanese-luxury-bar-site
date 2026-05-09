@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sakrairiya.github.io/japanese-luxury-bar-site/sitemap.xml
