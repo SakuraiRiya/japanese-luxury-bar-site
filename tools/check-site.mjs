@@ -53,7 +53,7 @@ for (const file of htmlFiles) {
 
 const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
 for (const page of pages) {
-  const url = page === "index.html" ? "https://sakrairiya.github.io/japanese-luxury-bar-site/" : `https://sakrairiya.github.io/japanese-luxury-bar-site/${page}`;
+  const url = page === "index.html" ? "https://sakurairiya.github.io/japanese-luxury-bar-site/" : `https://sakurairiya.github.io/japanese-luxury-bar-site/${page}`;
   if (!sitemap.includes(url)) {
     errors.push(`sitemap.xml missing ${url}`);
   }
