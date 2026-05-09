@@ -21,6 +21,24 @@ const messages = [
         baseUrl: "https://sakurairiya.github.io/japanese-luxury-bar-site"
       }
     }
+  },
+  {
+    jsonrpc: "2.0",
+    id: 4,
+    method: "tools/call",
+    params: {
+      name: "homepage_production_agent",
+      arguments: {
+        clientName: "BAR KAGE",
+        businessType: "Japanese luxury bar",
+        goal: "reservation conversion for a fictional demo site",
+        targetAudience: "adults looking for a quiet premium bar experience",
+        tone: "luxury, quiet, Japanese minimalism",
+        pages: ["Home", "Menu", "Space", "Reservation", "Access"],
+        publishTarget: "GitHub Pages",
+        constraints: ["fictional demo site", "no real booking", "no payment", "under-20 alcohol notice required"]
+      }
+    }
   }
 ];
 
@@ -59,9 +77,31 @@ if (!list.some((tool) => tool.name === "renewal_workflow")) {
   process.exit(1);
 }
 
+if (!list.some((tool) => tool.name === "homepage_production_agent")) {
+  console.error("MCP test failed: homepage_production_agent tool missing");
+  process.exit(1);
+}
+
 if (!audit.ok) {
   console.error(`MCP audit failed:\n${JSON.stringify(audit, null, 2)}`);
   process.exit(1);
 }
 
-console.log(`Renewal MCP check passed: ${list.length} tools and static-site audit verified.`);
+const homepageAgentText = responses.find((response) => response.id === 4)?.result?.content?.[0]?.text;
+const homepageAgent = JSON.parse(homepageAgentText || "{}");
+if (homepageAgent.agent?.name !== "homepage-production-agent") {
+  console.error("MCP test failed: homepage production agent did not return its agent identity");
+  process.exit(1);
+}
+
+if (!Array.isArray(homepageAgent.sitemap) || homepageAgent.sitemap.length < 5) {
+  console.error("MCP test failed: homepage production agent sitemap is incomplete");
+  process.exit(1);
+}
+
+if (!homepageAgent.qualityGates?.includes("npm test")) {
+  console.error("MCP test failed: homepage production agent quality gates missing npm test");
+  process.exit(1);
+}
+
+console.log(`Renewal MCP check passed: ${list.length} tools, homepage agent, and static-site audit verified.`);

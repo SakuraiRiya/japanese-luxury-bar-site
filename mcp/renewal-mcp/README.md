@@ -15,6 +15,7 @@ Codex / Claude から使う場合は、リポジトリ直下の `.mcp.json` を�
 - `renewal_workflow`: 今回の制作フローを含む標準チェックリストを返す
 - `audit_static_site`: HTML/CSS/sitemap/robots/日本語見出し改行を検査する
 - `github_pages_checklist`: GitHub Pages 公開前後の確認項目を返す
+- `homepage_production_agent`: 業種、目的、対象顧客、必要ページから、ホームページ制作のサイトマップ、コンテンツ設計、実装計画、品質ゲートを返す
 
 ## このMCPに含めた今回の流れ
 
@@ -25,3 +26,7 @@ Codex / Claude から使う場合は、リポジトリ直下の `.mcp.json` を�
 5. 日本語見出しは手動改行とCSSで整える
 6. `npm test`、`git diff --check`、スクリーンショット確認を行う
 7. `git diff` 確認後にコミット、push、GitHub Pages 実URL確認を行う
+
+## Homepage Production Agent
+
+エージェント定義は `agents/homepage-production-agent.md` に保存しています。MCP上では `homepage_production_agent` として呼び出せます。

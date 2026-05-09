@@ -25,4 +25,6 @@ It captures the renewal workflow used for this site: define completion criteria,
 
 The local MCP config is in `.mcp.json`.
 
+It also exposes `homepage_production_agent`, backed by `agents/homepage-production-agent.md`, for turning a business/site brief into sitemap, content requirements, design direction, implementation tasks, and quality gates.
+
 The reservation and access content is intentionally fictional. No real booking, payment, or CMS integration is included.
