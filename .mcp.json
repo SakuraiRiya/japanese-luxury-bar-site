@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "renewal-workflow": {
+      "command": "node",
+      "args": ["mcp/renewal-mcp/server.mjs"]
+    }
+  }
+}

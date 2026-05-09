@@ -49,6 +49,21 @@ for (const file of htmlFiles) {
   if (!html.includes("架空") || !html.includes("20歳未満")) {
     errors.push(`${file} must include fictional-site and age notices`);
   }
+  for (const match of html.matchAll(/<(h[12])([^>]*)>([\s\S]*?)<\/\1>/g)) {
+    const [, tag, attrs, inner] = match;
+    const text = inner.replace(/<[^>]+>/g, "").replace(/\s+/g, "");
+    const hasManualLines = attrs.includes("headline-lines") && inner.includes('class="line"');
+    if (text.length >= 14 && !hasManualLines) {
+      errors.push(`${file} ${tag} needs intentional Japanese line breaks: ${text}`);
+    }
+  }
+}
+
+const css = await readFile(path.join(root, "assets/css/styles.css"), "utf8");
+for (const rule of ["line-break: strict", "text-wrap: balance", "word-break: auto-phrase"]) {
+  if (!css.includes(rule)) {
+    errors.push(`assets/css/styles.css missing Japanese headline rule: ${rule}`);
+  }
 }
 
 const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");

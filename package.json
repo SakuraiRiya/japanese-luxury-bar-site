@@ -4,6 +4,6 @@
   "private": true,
   "description": "Static GitHub Pages demo site for the fictional Japanese luxury bar BAR KAGE.",
   "scripts": {
-    "test": "node tools/check-site.mjs"
+    "test": "node tools/check-site.mjs && node tools/test-renewal-mcp.mjs"
   }
 }

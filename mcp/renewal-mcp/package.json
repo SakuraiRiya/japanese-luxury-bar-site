@@ -1,0 +1,9 @@
+{
+  "name": "renewal-workflow-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "renewal-workflow-mcp": "server.mjs"
+  }
+}
